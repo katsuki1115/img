@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>画像マップのサンプル</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>画像マップ表示サンプル</h1>
+
+  <img src="../img/map.png" usemap="#image-map" alt="サンプル画像">
+
+  <map name="image-map">
+    <!-- 左上の四角形リンク -->
+    <area shape="rect" coords="50,50,150,150" href="https://example.com/area1" alt="リンク1" target="_blank">
+
+    <!-- 円形のリンク -->
+    <area shape="circle" coords="300,300,50" href="https://example.com/area2" alt="リンク2" target="_blank">
+
+    <!-- 多角形リンク（例：三角形） -->
+    <area shape="poly" coords="400,100,500,200,300,200" href="https://example.com/area3" alt="リンク3" target="_blank">
+  </map>
+</body>
+
+</html>
