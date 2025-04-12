@@ -42,21 +42,6 @@ body {
   background-color: rgba(255, 0, 0, 0.6);
 }
 
-/* .hotspot {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  background-color: rgba(255, 105, 180, 0.5);
-  border-radius: 50%;
-  cursor: pointer;
-  transform: translate(-50%, -50%);
-  transition: background-color 0.3s;
-}
-
-.hotspot:hover {
-  background-color: rgba(255, 20, 147, 0.7);
-} */
-
 /* モーダル */
 .modal {
   display: none;
@@ -76,7 +61,9 @@ body {
   padding: 20px;
   border-radius: 12px;
   max-width: 80%;
+  max-height: 60vh;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 100px;
   text-align: left;
 }
 
@@ -91,6 +78,140 @@ body {
   opacity: 0;
   animation: fadeIn 1.2s ease-out forwards;
 }
+
+/* 履歴は画像の直下に出す */
+.chat-history-container {
+  width: 100%;
+  background: #fffafc;
+  padding: 10px;
+  display: none;
+  /* 初期は非表示 */
+}
+
+/* 開閉ボタン */
+.toggle-chat {
+  display: block;
+  margin: 0 auto 10px;
+  background: #ff69b4;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* チャット履歴 */
+.chat-messages {
+  max-height: 180px;
+  overflow-y: auto;
+  font-size: 14px;
+  text-align: left;
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 下部固定のチャット入力 */
+.chat-box {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  display: flex;
+  background: #fff;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.chat-box input {
+  flex: 1;
+  padding: 8px;
+  margin-right: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.chat-box button {
+  background: #ff69b4;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+/* ラッパーは常に表示 */
+.chat-history-wrapper {
+  width: 100%;
+  background: #fffafc;
+  padding: 10px;
+}
+
+/* 履歴だけ開閉できるようにクラスで制御 */
+.chat-messages.hidden {
+  display: none;
+}
+
+/* .chat-box {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fffafc;
+  border-top: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+.chat-messages {
+  max-height: 180px;
+  overflow-y: auto;
+  margin-bottom: 5px;
+  font-size: 14px;
+  text-align: left;
+  padding: 0 5px;
+}
+
+.chat-box input {
+  padding: 8px;
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-right: 5px;
+}
+
+.chat-box button {
+  padding: 8px 12px;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
+.toggle-chat {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: #ff69b4;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.chat-box.hidden {
+  display: none;
+} */
 
 @keyframes fadeIn {
   to {

@@ -28,7 +28,26 @@
     </div>
   </div>
 
+  <!-- チャット履歴エリア（画像の下に表示） -->
+  <!-- <div class="chat-history-container" id="chatHistoryContainer">
+    <button id="toggleChat" class="toggle-chat">▲ チャットを閉じる</button>
+    <div class="chat-messages" id="chatMessages"></div>
+  </div> -->
+  <div class="chat-history-wrapper">
+    <button id="toggleChat" class="toggle-chat">▲ チャットを閉じる</button>
+  
+    <!-- チャット履歴だけ開閉 -->
+    <div class="chat-messages" id="chatMessages"></div>
+  </div>
+
+  <!-- チャット入力フォーム（画面下に固定） -->
+  <div class="chat-box" id="chatBox">
+    <input type="text" id="chatInput" placeholder="メッセージを入力..." />
+    <button onclick="sendMessage()">送信</button>
+  </div>
+
   <script src="src/js/script.js" defer></script>
+  <script src="src/js/chat.js" defer></script>
 </body>
 
 </html>
