@@ -2,36 +2,33 @@
 <html lang="ja">
 
 <head>
-  <meta charset="UTF-8">
-  <title>画像マップのサンプル</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>花見のしおり</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
-  <h1>画像マップ表示サンプル</h1>
+  <h1 class="fade-in title">花見のしおり 🌸</h1>
+  <div class="map-container fade-in">
+    <img src="img/map.png" alt="花見マップ" class="map" />
 
-  <img src="img/map.png" usemap="#image-map" alt="サンプル画像">
+    <!-- タップ領域（例：中央広場） -->
+    <div class="hotspot" style="top: 40%; left: 50%;" data-title="中央広場" data-description="ゆったりと花見が楽しめるスポットです。"></div>
 
-  <map name="image-map">
-    <!-- 左上の四角形リンク -->
-    <area shape="rect" coords="50,50,150,150" href="https://example.com/area1" alt="リンク1" target="_blank">
+    <!-- 他のエリアも同様に追加可能 -->
+  </div>
 
-    <!-- 円形のリンク -->
-    <area shape="circle" coords="300,300,50" href="https://example.com/area2" alt="リンク2" target="_blank">
+  <!-- モーダル -->
+  <div class="modal" id="infoModal">
+    <div class="modal-content">
+      <span class="close-button" id="closeModal">&times;</span>
+      <h2 id="modalTitle">タイトル</h2>
+      <p id="modalDescription">説明文</p>
+    </div>
+  </div>
 
-    <!-- 多角形リンク（例：三角形） -->
-    <area shape="poly" coords="400,100,500,200,300,200" href="https://example.com/area3" alt="リンク3" target="_blank">
-  </map>
+  <script src="src/js/script.js" defer></script>
 </body>
 
 </html>
