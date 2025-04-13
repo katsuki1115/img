@@ -12,30 +12,16 @@ body {
   font-size: 1.8em;
 }
 
-.map-container {
-  position: relative;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.map {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 .hotspot {
   position: absolute;
   width: 30px;
   height: 30px;
   background-color: rgba(255, 0, 0, 0.4);
-  /* ← ここを変更 */
   border-radius: 50%;
   cursor: pointer;
   transform: translate(-50%, -50%);
   transition: background-color 0.3s;
   border: 1px solid red;
-  /* 見やすくするために追加も可 */
 }
 
 .hotspot:hover {
@@ -73,145 +59,134 @@ body {
   cursor: pointer;
 }
 
-/* フェードインアニメ */
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 1.2s ease-out forwards;
+/* タイムスケジュール表のスタイル */
+.schedule-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fdfaf5;
+  /* 和紙風の背景色 */
+  border: 2px solid #e8d8c3;
+  border-radius: 12px;
+  max-width: 700px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
 }
 
-/* 履歴は画像の直下に出す */
-.chat-history-container {
+.schedule-table {
   width: 100%;
-  background: #fffafc;
-  padding: 10px;
-  display: none;
-  /* 初期は非表示 */
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 16px;
+  color: #3e3e3e;
 }
 
-/* 開閉ボタン */
-.toggle-chat {
+.schedule-table th,
+.schedule-table td {
+  padding: 14px 10px;
+  vertical-align: top;
+  line-height: 1.8;
+  font-weight: normal;
+}
+
+.schedule-table th:first-child,
+.schedule-table td:first-child {
+  width: 80px;
+  text-align: center;
+  white-space: nowrap;
+  color: #5c5c5c;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.schedule-table th:last-child,
+.schedule-table td:last-child {
+  width: auto;
+  text-align: left;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.map {
+  width: 100%;
   display: block;
-  margin: 0 auto 10px;
-  background: #ff69b4;
+}
+
+.toggle-panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease, padding 0.3s ease, opacity 0.3s ease;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toggle-panel.open {
+  max-height: 1000px;
+  padding: 10px 0;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toggle-btn {
+  display: block;
+  margin: 20px auto 10px;
+  background: #c19e87;
   color: white;
   border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 14px;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-/* チャット履歴 */
-.chat-messages {
-  max-height: 180px;
-  overflow-y: auto;
-  font-size: 14px;
-  text-align: left;
-  background: #fff;
-  padding: 10px;
-  border-radius: 6px;
+.toggle-btn:hover {
+  background: #a77d5f;
+}
+
+.map-btn {
+  margin: 10px auto;
+  display: block;
+  background: #f9c74f;
+  color: #333;
+  font-size: 16px;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* 下部固定のチャット入力 */
-.chat-box {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 999;
-  width: 100%;
-  display: flex;
-  background: #fff;
-  padding: 10px;
-  border-top: 1px solid #ccc;
+.meeting-marker-first {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: url('../img/star.png') no-repeat center center;
+  background-size: contain;
+  top: 62%;
+  right: 8%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }
 
-.chat-box input {
-  flex: 1;
-  padding: 8px;
-  margin-right: 6px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+.meeting-marker-second {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: url('../img/star.png') no-repeat center center;
+  background-size: contain;
+  top: 62%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }
-
-.chat-box button {
-  background: #ff69b4;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-}
-
-/* ラッパーは常に表示 */
-.chat-history-wrapper {
-  width: 100%;
-  background: #fffafc;
-  padding: 10px;
-}
-
-/* 履歴だけ開閉できるようにクラスで制御 */
-.chat-messages.hidden {
-  display: none;
-}
-
-/* .chat-box {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #fffafc;
-  border-top: 1px solid #ddd;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 9999;
-}
-
-.chat-messages {
-  max-height: 180px;
-  overflow-y: auto;
-  margin-bottom: 5px;
-  font-size: 14px;
-  text-align: left;
-  padding: 0 5px;
-}
-
-.chat-box input {
-  padding: 8px;
-  flex: 1;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  margin-right: 5px;
-}
-
-.chat-box button {
-  padding: 8px 12px;
-  background-color: #ff69b4;
-  color: white;
-  border: none;
-  border-radius: 6px;
-}
-
-.toggle-chat {
-  position: fixed;
-  bottom: 120px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  background: #ff69b4;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 14px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-
-.chat-box.hidden {
-  display: none;
-} */
 
 @keyframes fadeIn {
   to {
@@ -229,5 +204,30 @@ body {
   .hotspot {
     width: 25px;
     height: 25px;
+  }
+
+  .schedule-wrapper {
+    padding: 20px 16px;
+    margin: 20px auto;
+    width: 90%;
+    overflow-x: auto;
+    box-sizing: border-box;
+  }
+
+  .schedule-table {
+    font-size: 15px;
+    margin: auto;
+    table-layout: fixed;
+    word-break: break-word;
+  }
+
+  .schedule-table th {
+    font-size: 16px;
+    padding: 10px 8px;
+  }
+
+  .schedule-table td {
+    padding: 12px 8px;
+    line-height: 1.5;
   }
 }
