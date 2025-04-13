@@ -76,9 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
       panelToHide.classList.toggle("open", isOpen);
 
       if (!isOpen) {
-        button.textContent = "▲ マップに戻る";
+        button.textContent = "マップに戻る";
       } else {
-        button.textContent = "▼ スケジュールを確認する";
+        button.textContent = "スケジュールを確認する";
       }
     });
   });
