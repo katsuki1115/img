@@ -6,51 +6,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>新入社員歓迎会のしおり</title>
   <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-  <h1 class="fade-in title">🌸新入社員歓迎会のしおり🌸</h1>
-  <button id="toggleScheduleBtn" class="toggle-btn" data-target="schedulePanel">スケジュールを確認する</button>
+  <div class="page-wrapper">
+    <main class="main-content">
+      <h1 class="fade-in title">🌸新入社員歓迎会のしおり🌸</h1>
+      <button id="toggleScheduleBtn" class="toggle-btn" data-target="schedulePanel">スケジュールを確認する</button>
   
-  <div id="mapPanel" class="toggle-panel open">
-    <h2 class="map-title">代々木公園</h2>
-    <div class="map-container">
-      <img src="../../img/map.png" alt="花見マップ" class="map" />
-      <!-- <div class="hotspot" style="top: 40%; left: 50%;" data-title="中央広場" data-description="ゆったりと花見が楽しめるスポットです。"></div> -->
-    </div>
-    <div class="map-actions">
-      <button id="addMeetingSpotBtn" class="map-btn">朝の集合場所を表示</button>
-    </div>
-  </div>
-  <div class="schedule-toggle">
-    <div id="schedulePanel" class="toggle-panel">
-      <div id="scheduleContainer" class="schedule-wrapper">
-        <table class="schedule-table">
-          <tr><th>時間</th><th>内容</th></tr>
-          <tr><td>10:00</td><td>集合・挨拶（軽くアイスブレイク）<br>全体で自己紹介</td></tr>
-          <tr><td>10:30</td><td>グループ分け（4チーム予定）</td></tr>
-          <tr><td>10:40</td><td>グループ毎に散策開始!<br>→Photoコンテストも忘れずに!</td></tr>
-          <tr><td>11:30</td><td>チーム毎に帰還＆団欒タイム<br>（軽食や飲み物なども◎）</td></tr>
-          <tr><td>12:00</td><td>チーム対抗ゲーム</td></tr>
-          <tr><td>12:40</td><td>Photoコンテスト＆itoの結果発表・表彰</td></tr>
-          <tr><td>13:00</td><td>クロージング（感想シェア・解散）</td></tr>
-        </table>
+      <div id="mapPanel" class="toggle-panel open">
+        <h2 class="map-title">代々木公園</h2>
+        <div class="map-container">
+          <img src="../../img/map.png" alt="花見マップ" class="map" />
+        </div>
+        <div class="map-actions">
+          <button id="addMeetingSpotBtn" class="map-btn">朝の集合場所を表示</button>
+          <button id="toggleHotspotsBtn" class="map-btn">おすすめスポットを表示</button>
+        </div>
       </div>
-    </div>
-  </div>
+      <div class="schedule-toggle">
+        <div id="schedulePanel" class="toggle-panel">
+          <div id="scheduleContainer" class="schedule-wrapper">
+            <table class="schedule-table">
+              <tr><th>時間</th><th>内容</th></tr>
+              <tr><td>10:00</td><td>集合・挨拶（軽くアイスブレイク）<br>全体で自己紹介</td></tr>
+              <tr><td>10:30</td><td>グループ分け（4チーム予定）</td></tr>
+              <tr><td>10:40</td><td>グループ毎に散策開始!<br>→Photoコンテストも忘れずに!</td></tr>
+              <tr><td>11:30</td><td>チーム毎に帰還＆団欒タイム<br>（軽食や飲み物なども◎）</td></tr>
+              <tr><td>12:00</td><td>チーム対抗ゲーム</td></tr>
+              <tr><td>12:40</td><td>Photoコンテスト＆itoの結果発表・表彰</td></tr>
+              <tr><td>13:00</td><td>クロージング（感想シェア・解散）</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
 
-  <!-- モーダル -->
-  <div class="modal" id="infoModal">
-    <div class="modal-content">
-      <span class="close-button" id="closeModal">&times;</span>
-      <h2 id="modalTitle">タイトル</h2>
-      <p id="modalDescription">説明文</p>
-    </div>
-  </div>
+      <!-- モーダル -->
+      <div class="modal" id="infoModal">
+        <div class="modal-content">
+          <span class="close-button" id="closeModal">&times;</span>
+          <h2 id="modalTitle">タイトル</h2>
+          <p id="modalDescription">説明文</p>
+        </div>
+      </div>
 
-  <a href="../../index.html">イベント一覧へ</a>
+      <a href="../../index.html">イベント一覧へ</a>
+    </main>
+
+    <div id="footer-container"></div>
+  </div>
 
   <script src="../../src/js/script.js" defer></script>
+  <script src="../../src/js/hotspot.js" defer></script>
+  <script src="../../src/js/marker.js" defer></script>
+  <script src="../js/footer.js" defer data-footer-path="../components/footer.html"></script>
 </body>
 
 </html>

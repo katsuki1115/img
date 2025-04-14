@@ -1,15 +1,38 @@
+html,body {
+  height: 100%;
+}
+
 body {
-  margin: 0;
-  font-family: sans-serif;
-  background: #fffafc;
-  color: #333;
   text-align: center;
   overflow-x: hidden;
+  background: linear-gradient(120deg, #fff1f2, #ffe4e6);
+  font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .title {
   margin: 20px 0;
   font-size: 1.8em;
+}
+
+.event-note {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin-top: 30px;
+  font-style: italic;
 }
 
 .hotspot {
@@ -22,6 +45,7 @@ body {
   transform: translate(-50%, -50%);
   transition: background-color 0.3s;
   border: 1px solid red;
+  outline: none;
 }
 
 .hotspot:hover {
@@ -59,7 +83,6 @@ body {
   cursor: pointer;
 }
 
-/* タイムスケジュール表のスタイル */
 .schedule-wrapper {
   display: flex;
   justify-content: center;
@@ -164,17 +187,40 @@ body {
   background: #a77d5f;
 }
 
+.map-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px auto;
+  padding: 0 16px;
+  flex-wrap: wrap;
+}
+
 .map-btn {
-  margin: 10px auto;
-  display: block;
-  background: #f9c74f;
+  flex: 1 1 0;
+  min-width: 140px;
+  padding: 12px 16px;
+  background: #fbc02d;
   color: #333;
-  font-size: 16px;
   border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-size: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, transform 0.1s;
+  white-space: normal;
+  /* ← 複数行許可 */
+  text-align: center;
+  line-height: 1.4;
+  /* スマホ用*/
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  -webkit-touch-callout: none;
+}
+
+.map-btn:hover {
+  background: #f9a825;
+  transform: translateY(-1px);
 }
 
 .meeting-marker-first {
@@ -201,6 +247,159 @@ body {
   z-index: 10;
 }
 
+.meeting-marker-first.with-label {
+  position: absolute;
+  top: 62%;
+  right: 8%;
+  width: 32px;
+  height: 32px;
+  background: url('../img/star.png') no-repeat center center;
+  background-size: contain;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* 吹き出しラベルをマーカー内に絶対配置 */
+.meeting-marker-first.with-label .marker-label {
+  position: absolute;
+  bottom: 100%;
+  /* ← マーカーの上に出す */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #333;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 6px;
+}
+
+/* 吹き出しの三角形 */
+.meeting-marker-first.with-label .marker-label::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+.meeting-marker-second.with-label {
+  position: absolute;
+  top: 62%;
+  right: 8%;
+  width: 32px;
+  height: 32px;
+  background: url('../img/star.png') no-repeat center center;
+  background-size: contain;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* 吹き出しラベルをマーカー内に絶対配置 */
+.meeting-marker-second.with-label .marker-label {
+  position: absolute;
+  bottom: 100%;
+  /* ← マーカーの上に出す */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #333;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 6px;
+}
+
+/* 吹き出しの三角形 */
+.meeting-marker-second.with-label .marker-label::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* 基本レイアウト */
+.footer {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 20px 16px 0;
+  margin-top: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-content h2 {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.footer-content p {
+  font-size: 13px;
+  max-width: 600px;
+  margin: 0 auto 12px;
+  line-height: 1.4;
+}
+
+/* SNSアイコン */
+.social-icons {
+  margin-bottom: 16px;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin: 0 10px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  background: #000;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* 下部フッター */
+.footer-bottom {
+  background: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  flex-wrap: wrap;
+}
+
+.footer-bottom p,
+.footer-bottom a {
+  font-size: 12px;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+.footer-menu {
+  display: flex;
+  gap: 15px;
+}
+
 @keyframes fadeIn {
   to {
     opacity: 1;
@@ -217,6 +416,8 @@ body {
   .hotspot {
     width: 25px;
     height: 25px;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .schedule-wrapper {
