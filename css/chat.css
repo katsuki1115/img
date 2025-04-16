@@ -66,6 +66,7 @@ label[for="imageInput"] {
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
+  max-height: 40px;
 }
 
 .chat-messages {
@@ -170,6 +171,46 @@ label[for="imageInput"] {
   color: #111827;
 }
 
+.input-with-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  position: relative;
+}
+
+.image-preview {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: visible;
+  border: 1px solid #ddd;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cancel-button {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 20;
+}
+
 .hidden {
   display: none;
 }
@@ -198,6 +239,9 @@ label[for="imageInput"] {
   border-radius: 10px;
   border: 1px solid #ddd;
   justify-items: center;
+  bottom: 60px;
+  max-height: 30vh;
+  overflow-y: auto;
 }
 
 .stamp {

@@ -23,8 +23,15 @@
     </label>
     <input type="file" id="imageInput" accept="image/*" hidden>
     <button class="icon-button" id="stampButton"><i class="fas fa-smile"></i></button>
-    <input type="text" id="chatInput" placeholder="メッセージを入力..." class="chat-text-input">
-    <button onclick="sendMessage()" class="send-button">送信</button>
+    <div class="input-with-preview">
+      <div id="imagePreviewContainer" class="image-preview hidden">
+        <img id="imagePreview" src="" alt="プレビュー画像">
+        <button id="cancelPreview" class="cancel-button">&times;</button>
+      </div>
+    
+      <input type="text" id="chatInput" placeholder="メッセージを入力..." class="chat-text-input">
+    </div>
+    <button type="button" id="sendButton" class="send-button">送信</button>
   </div>
 
   <div id="stampPanel" class="stamp-panel">

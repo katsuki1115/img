@@ -22,9 +22,33 @@ const imageInput = document.getElementById("imageInput");
 
 let selectedImageFile = null;
 
+// 画像読み込み用
 imageInput.addEventListener("change", (event) => {
   selectedImageFile = event.target.files[0];
+
+  if (selectedImageFile) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      document.getElementById("imagePreview").src = e.target.result;
+      document.getElementById("imagePreviewContainer").classList.remove("hidden");
+    };
+    reader.readAsDataURL(selectedImageFile);
+  } else {
+    clearImagePreview();
+  }
 });
+
+// プレビュー非表示
+document.getElementById("cancelPreview").addEventListener("click", () => {
+  selectedImageFile = null;
+  imageInput.value = "";
+  clearImagePreview();
+});
+
+function clearImagePreview() {
+  document.getElementById("imagePreview").src = "";
+  document.getElementById("imagePreviewContainer").classList.add("hidden");
+}
 
 // 送信
 async function sendMessage() {
@@ -50,10 +74,13 @@ async function sendMessage() {
     });
 
     // 入力クリア
+    clearImagePreview();
     selectedImageFile = null;
     imageInput.value = "";
   }
 }
+
+document.getElementById("sendButton").addEventListener("click", sendMessage);
 
 /*
 受信（リアルタイム）
@@ -148,15 +175,14 @@ chatRef.on("child_added", (snapshot) => {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+// チャット内容表示
 chatRef.on("child_changed", (snapshot) => {
   const msg = snapshot.val();
   const key = snapshot.key;
 
-  // 既に表示されている要素を探す
   const existingDiv = document.querySelector(`[data-id="${key}"]`);
   if (!existingDiv) return;
 
-  // 中身をクリアして再構成
   existingDiv.innerHTML = "";
   existingDiv.className = "chat-message";
 
@@ -188,6 +214,7 @@ chatRef.on("child_changed", (snapshot) => {
   }
 });
 
+// モーダル表示
 function showModal(message, buttons = []) {
   const overlay = document.getElementById("modalOverlay");
   const msg = document.getElementById("modalMessage");
