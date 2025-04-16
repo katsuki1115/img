@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>チャット</title>
+  <link rel="stylesheet" href="../../css/chat.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <header class="chat-header">
+    <button id="backButton" class="icon-button" onclick="history.back()"><i class="fas fa-chevron-left"></i></button>
+    <h1>チャット</h1>
+  </header>
+
+  <div class="chat-messages" id="chatMessages"></div>
+
+  <div class="chat-input-row">
+    <label for="imageInput" class="icon-button">
+      <i class="fas fa-image"></i>
+    </label>
+    <input type="file" id="imageInput" accept="image/*" hidden>
+    <button class="icon-button" id="stampButton"><i class="fas fa-smile"></i></button>
+    <input type="text" id="chatInput" placeholder="メッセージを入力..." class="chat-text-input">
+    <button onclick="sendMessage()" class="send-button">送信</button>
+  </div>
+
+  <div id="stampPanel" class="stamp-panel">
+    <div class="stamp stamp1" data-stampid="stamp1"></div>
+    <div class="stamp stamp2" data-stampid="stamp2"></div>
+    <div class="stamp stamp3" data-stampid="stamp3"></div>
+    <div class="stamp stamp4" data-stampid="stamp4"></div>
+    <div class="stamp stamp5" data-stampid="stamp5"></div>
+    <div class="stamp stamp6" data-stampid="stamp6"></div>
+    <div class="stamp stamp7" data-stampid="stamp7"></div>
+    <div class="stamp stamp8" data-stampid="stamp8"></div>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal-box">
+      <p id="modalMessage">メッセージ</p>
+      <div id="modalButtons" class="modal-buttons">
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-storage-compat.js"></script>
+  
+  <script type="module" src="../../src/js/firebase.js" defer></script>
+</body>
+
+</html>
