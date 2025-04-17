@@ -74,19 +74,41 @@ async function sendMessage() {
   if (selectedImageFile) {
     const file = selectedImageFile;
     const storageRef = storage.ref("chat-images/" + Date.now() + "_" + file.name);
-    await storageRef.put(file);
-    const url = await storageRef.getDownloadURL();
+    const uploadTask = storageRef.put(file);
+    const progressBar = document.getElementById("uploadProgress");
+    const progressContainer = document.getElementById("uploadProgressContainer");
 
-    await chatRef.push({
-      user: userName,
-      imageUrl: url,
-      timestamp: Date.now()
-    });
+    progressContainer.classList.remove("hidden");
 
-    // 入力クリア
-    clearImagePreview();
-    selectedImageFile = null;
-    imageInput.value = "";
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        progressBar.value = percent;
+      },
+      (error) => {
+        console.error("アップロード失敗:", error);
+        progressContainer.classList.add("hidden");
+      },
+      async () => {
+        const url = await uploadTask.snapshot.ref.getDownloadURL();
+
+        await chatRef.push({
+          user: userName,
+          imageUrl: url,
+          timestamp: Date.now()
+        });
+
+        // クリア処理
+        progressBar.value = 0;
+        progressContainer.classList.add("hidden");
+        clearImagePreview();
+        selectedImageFile = null;
+        imageInput.value = "";
+      }
+    );
+    // await storageRef.put(file);
+    // const url = await storageRef.getDownloadURL();
   }
 }
 
@@ -288,7 +310,7 @@ function promptUserName() {
 
   message.innerHTML = `
     <label for="nameInput">チャットで使う名前を入力してください</label><br>
-    <input type="text" id="nameInput" class="chat-text-input" placeholder="例：まーちゃん" style="margin-top: 10px; width: 90%;">
+    <input type="text" id="nameInput" class="chat-text-input" placeholder="例：かつき" style="margin-top: 10px; width: 90%;">
   `;
 
   buttons.innerHTML = "";

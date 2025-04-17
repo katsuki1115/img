@@ -5,6 +5,8 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 button {
@@ -54,6 +56,10 @@ label[for="imageInput"] {
   position: sticky;
   bottom: 0;
   z-index: 1000;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .chat-text-input {
@@ -80,6 +86,19 @@ label[for="imageInput"] {
   overflow-y: auto;
   padding: 10px;
   background: #f0f0f0;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.upload-progress {
+  margin-top: 8px;
+  padding: 4px 10px;
+}
+
+.upload-progress progress {
+  width: 100%;
+  height: 8px;
+  appearance: none;
 }
 
 .chat-message p {
@@ -90,6 +109,8 @@ label[for="imageInput"] {
   max-width: 100%;
   border-radius: 6px;
   margin-top: 6px;
+  height: auto;
+  box-sizing: border-box;
 }
 
 .chat-input {
