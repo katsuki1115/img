@@ -10,6 +10,13 @@ const firebaseConfig = {
   appId: "1:125275181215:web:6e1720d3412e8b18c6ab2a"
 };
 
+window.addEventListener("DOMContentLoaded", () => {
+  let userName = localStorage.getItem("chatUserName");
+  if (!userName) {
+    promptUserName();
+  }
+});
+
 firebase.initializeApp(firebaseConfig);
 
 const storage = firebase.app().storage("no1sevents-hanami.firebasestorage.app");
@@ -52,10 +59,12 @@ function clearImagePreview() {
 
 // 送信
 async function sendMessage() {
+  const userName = localStorage.getItem("chatUserName") || "名無し";
   const text = input.value.trim();
 
   if (text !== "") {
     await chatRef.push({
+      user: userName,
       text: text,
       timestamp: Date.now()
     });
@@ -69,6 +78,7 @@ async function sendMessage() {
     const url = await storageRef.getDownloadURL();
 
     await chatRef.push({
+      user: userName,
       imageUrl: url,
       timestamp: Date.now()
     });
@@ -92,8 +102,15 @@ chatRef.on("child_added", (snapshot) => {
   div.dataset.id = snapshot.key;
 
   if (msg.deleted) {
-    div.textContent = "このメッセージは削除されました";
+    div.textContent = "削除されました";
   } else {
+    if (msg.user) {
+      const nameEl = document.createElement("div");
+      nameEl.textContent = msg.user;
+      nameEl.className = "chat-user";
+      div.appendChild(nameEl);
+    }
+    
     if (msg.text) {
       const text = document.createElement("p");
       text.textContent = msg.text;
@@ -187,7 +204,7 @@ chatRef.on("child_changed", (snapshot) => {
   existingDiv.className = "chat-message";
 
   if (msg.deleted) {
-    existingDiv.textContent = "このメッセージは削除されました";
+    existingDiv.textContent = "削除されました";
   } else {
     if (msg.text) {
       const text = document.createElement("p");
@@ -250,13 +267,43 @@ stampBtn.addEventListener("click", () => {
 document.querySelectorAll("#stampPanel .stamp").forEach((img) => {
   img.addEventListener("click", () => {
     const stampId = img.dataset.stampid;
+    let userName = localStorage.getItem("chatUserName");
     if (!stampId) return;
 
     chatRef.push({
+      user: userName,
       stampId: stampId,
       timestamp: Date.now()
     });
 
-    stampPanel.classList.add("hidden");
+    // stampPanel.classList.add("hidden");
   });
 });
+
+// 名前入力
+function promptUserName() {
+  const overlay = document.getElementById("modalOverlay");
+  const message = document.getElementById("modalMessage");
+  const buttons = document.getElementById("modalButtons");
+
+  message.innerHTML = `
+    <label for="nameInput">チャットで使う名前を入力してください</label><br>
+    <input type="text" id="nameInput" class="chat-text-input" placeholder="例：まーちゃん" style="margin-top: 10px; width: 90%;">
+  `;
+
+  buttons.innerHTML = "";
+
+  const okBtn = document.createElement("button");
+  okBtn.textContent = "OK";
+  okBtn.className = "confirm";
+  okBtn.onclick = () => {
+    const nameInput = document.getElementById("nameInput").value.trim();
+    if (nameInput) {
+      localStorage.setItem("chatUserName", nameInput);
+      overlay.classList.add("hidden");
+    }
+  };
+
+  buttons.appendChild(okBtn);
+  overlay.classList.remove("hidden");
+}
