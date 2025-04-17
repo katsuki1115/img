@@ -83,6 +83,14 @@ body {
   cursor: pointer;
 }
 
+.schedule-title {
+  font-size: 20px;
+  color: #5a4a42;
+  font-weight: bold;
+  font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+  text-align: left;
+}
+
 .schedule-wrapper {
   display: flex;
   justify-content: center;
@@ -127,6 +135,36 @@ body {
 .schedule-table td:last-child {
   width: auto;
   text-align: left;
+}
+
+.schedule-note {
+  border-radius: 8px;
+  font-size: 14px;
+  color: #444;
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  line-height: 1.8;
+  font-size: 15px;
+  font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+}
+
+.item-list li {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.item-list .note {
+  font-size: 14px;
+  color: #666;
+  display: block;
+  margin-left: 4px;
 }
 
 .map-container {
@@ -242,7 +280,7 @@ body {
   background: url('../img/star.png') no-repeat center center;
   background-size: contain;
   top: 62%;
-  left: 20%;
+  left: 40%;
   transform: translate(-50%, -50%);
   z-index: 10;
 }
